@@ -4,31 +4,38 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import ru.euleskelett.spaceofbattle.model.Mas;
+import ru.euleskelett.spaceofbattle.utils.UI;
 
 public class GameScreen implements Screen {
-    private Texture masTexture;
+
+    private TextureAtlas textureAtlas;
     private SpriteBatch batch;
     private Mas mas;
     private OrthographicCamera camera;
+    private UI ui;
 
     public static float deltaCff;
 
     @Override
     public void show() {
         batch = new SpriteBatch();
-        masTexture = new Texture(Gdx.files.internal("mas.png"));
-        masTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        mas = new Mas(masTexture, 0, 0, 1f, 1f * 1.34f);
+        mas = new Mas(textureAtlas.findRegion("0"), 0, 0, 1f, 1f * 1.34f);
+        ui = new UI();
+    }
+
+    public void setTextureAtlas(TextureAtlas textureAtlas) {
+        this.textureAtlas = textureAtlas;
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         deltaCff = delta;
 
@@ -36,6 +43,7 @@ public class GameScreen implements Screen {
         batch.begin();
         mas.draw(batch);
         batch.end();
+        ui.draw();
     }
 
     @Override
@@ -61,7 +69,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        masTexture.dispose();
         batch.dispose();
+        ui.dispose();
     }
 }

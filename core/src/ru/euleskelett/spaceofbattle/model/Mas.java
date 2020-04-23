@@ -2,6 +2,7 @@ package ru.euleskelett.spaceofbattle.model;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import ru.euleskelett.spaceofbattle.control.MasController;
 
@@ -9,8 +10,8 @@ import ru.euleskelett.spaceofbattle.control.MasController;
 public class Mas extends GameObject{
 
     private MasController masController;
-    public Mas(Texture texture, float x, float y, float width, float height) {
-        super(texture, x, y, width, height);
+    public Mas(TextureRegion textureRegion, float x, float y, float width, float height) {
+        super(textureRegion, x, y, width, height);
         masController = new MasController(bouds);
     }
     @Override
