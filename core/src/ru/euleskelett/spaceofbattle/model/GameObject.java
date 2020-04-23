@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Polygon;
 
      Polygon bouds;
      Sprite object;
-    public GameObject(Texture texture, float x, float y, float width, float height){
+     GameObject(Texture texture, float x, float y, float width, float height){
         bouds = new Polygon( new float[]{0f, 0f, width, 0f, width, height, 0f, height});
         bouds.setPosition(x, y);
         bouds.setOrigin(width/2f, height/2f);
@@ -19,6 +19,7 @@ import com.badlogic.gdx.math.Polygon;
         object = new Sprite(texture);
         object.setSize(width, height);
         object.setPosition(x, y);
+        object.setOrigin(width/2f, height/2f);
     }
     public void draw(SpriteBatch batch){
         object.setPosition(bouds.getX(), bouds.getY());
